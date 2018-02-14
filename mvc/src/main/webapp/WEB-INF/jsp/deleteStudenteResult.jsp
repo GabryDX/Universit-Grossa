@@ -37,17 +37,10 @@ a {
 <img width="100" align=right src="https://image.spreadshirtmedia.com/image-server/v1/mp/designs/103850169,width=178,height=178/illuminatipng-long-sleeve-shirts.png">
 <p style="font-size: 100px" align="center">UNIVERSITÀ GROSSA</p>
 
-<h1>Eliminare lo studente?</h1>
+
 <form:form method="POST" action="/corso/universita/deleteStudenteQuery" modelAttribute="sdf2">
 
-<%-- <h2>Matricola: ${stu.stuMatricola}</h2>
-<h2>Cognome: ${stu.stuCognome}</h2>
-<h2>Nome: ${stu.stuNome}</h2>
-<h2>Data d'iscrizione: ${stu.stuIscrizione}</h2>
-<h2>Sesso: ${stu.stuSesso}</h2>
-<h2>Data di nascita: ${stu.stuDataNascita}</h2>
-<h2>Luogo di nascita: ${stu.stuLuogoNascita}</h2>
-<h2>Corso di laurea: ${stu.stuCorsoDiLaurea.cdlNome}</h2> --%>
+<h1>Eliminare ${sdf2.studenti.size()} studenti?</h1>
 
 <table style="font-size: 20px" id="t01">
     <tr align="left">

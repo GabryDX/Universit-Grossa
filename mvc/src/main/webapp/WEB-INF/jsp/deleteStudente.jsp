@@ -65,7 +65,7 @@ function check(event) {
 
 	<%-- <h1>Numero studenti: ${stuList.size()}</h1> --%>
 
-	<h1>Cerca studente:</h1>
+	<h1>Seleziona di studenti da rimuovere:</h1>
 	<form:form method="POST" action="/corso/universita/mostraStudenteQuery"	modelAttribute="sdf">
 		
 		<form:hidden path="delete" id="lista" />
