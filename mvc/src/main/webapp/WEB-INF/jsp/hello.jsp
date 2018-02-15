@@ -1,4 +1,7 @@
 <html>
+<head>
+<link href="/corso/resources/css/grafica.css" rel="stylesheet" type="text/css">
+</head>
 <body>
 	<img
 		src="https://images.wired.it/wp-content/uploads/2016/04/1460976679_ciaone.png">
