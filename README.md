@@ -1,2 +1,2 @@
-# Universit-Grossa
+# UniversitaGrossa
 Spring MVC Project
