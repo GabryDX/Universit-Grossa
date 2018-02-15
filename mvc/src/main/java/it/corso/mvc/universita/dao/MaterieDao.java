@@ -135,6 +135,21 @@ public class MaterieDao implements IMaterieDao {
 	}
 
 	@Override
+	public List<Materia> readMatByCdlId(int cdlId) {
+		List<Materia> mats = session
+			.createQuery(
+				"SELECT m FROM Materia m"
+					+ " WHERE m.matCorsoDiLaurea.cdlId = :id",
+				Materia.class)
+			.setParameter("id", cdlId)
+			.getResultList();
+		logger.info(String.format(
+			"readMatByCdlId(%d): letti %d elementi mat",
+			cdlId, mats.size()));
+		return mats;
+	}
+	
+	@Override
 	public List<Materia> readMatByCdlIdAaAnnoCorso(int cdlId,
 			AnnoAccademico aa, int matAnnoCorso) {
 		List<Materia> mats = session

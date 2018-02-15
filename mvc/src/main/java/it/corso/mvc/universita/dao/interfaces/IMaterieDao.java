@@ -17,8 +17,11 @@ public interface IMaterieDao {
 	public boolean deleteMat(int matId,
 			AnnoAccademico matAnnoAccademico);
 
+	public List<Materia> readMatByCdlId(int cdlId);
+	
 	public List<Materia> readMatByCdlIdAaAnnoCorso(int cdlId,
 			AnnoAccademico aa, int matAnnoCorso);
 
 	public List<Materia> readMatAll();
+
 }

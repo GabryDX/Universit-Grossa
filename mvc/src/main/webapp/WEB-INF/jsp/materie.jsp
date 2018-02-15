@@ -33,7 +33,7 @@ table#t01 th {
 
 <h1>Numero materie: ${materie.size()}</h1>
 
-<table style="font-size: 30px" id="t01">
+<table style="font-size: 20px" id="t01">
     <tr align="left">
       <th>ID</th>
       <th>Nome</th>

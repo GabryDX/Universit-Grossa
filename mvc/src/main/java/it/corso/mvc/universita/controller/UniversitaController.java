@@ -17,6 +17,7 @@ import it.corso.mvc.universita.dao.interfaces.ICorsiDiLaureaDao;
 import it.corso.mvc.universita.dao.interfaces.IMaterieDao;
 import it.corso.mvc.universita.model.CorsoDiLaurea;
 import it.corso.mvc.universita.model.Materia;
+import it.corso.mvc.universita.model.form.CorsoMaterie;
 
 @Controller
 @RequestMapping("/universita")
@@ -61,7 +62,11 @@ public class UniversitaController {
 			risultato.setCdlNome("CORSO NON TROVATO");
 			risultato.setCdlId(corso.getCdlId());
 		}
-		ModelAndView modelAndView = new ModelAndView("formCorsoResult", "corso", risultato);
+		List<Materia> mats = matDao.readMatByCdlId(corso.getCdlId());
+		CorsoMaterie cm = new CorsoMaterie();
+		cm.setCdl(risultato);
+		cm.setMats(mats);
+		ModelAndView modelAndView = new ModelAndView("formCorsoResult", "cm", cm);
 		return modelAndView;
 	}
 	

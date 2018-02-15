@@ -96,10 +96,14 @@ function check(event) {
 
 				</tr>
 			</c:forEach>
+			<tr>
+				<spring:message code="label.submit" var="btnlabel"/>
+				<td colspan="9"><input type="submit" value="${btnlabel}" style="height:50px;width:100%"></td>
+			</tr>
 		</table>
 		
-		<spring:message code="label.submit" var="btnlabel"/>
-		<input type="submit" value="${btnlabel}" style="height:50px;width:500px">
+		
+		
 	</form:form>
 
 </body>

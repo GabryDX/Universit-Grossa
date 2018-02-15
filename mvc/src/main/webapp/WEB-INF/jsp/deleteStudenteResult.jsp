@@ -40,6 +40,8 @@ a {
 
 <form:form method="POST" action="/corso/universita/deleteStudenteQuery" modelAttribute="sdf2">
 
+<form:hidden path="delete"/>
+
 <h1>Eliminare ${sdf2.studenti.size()} studenti?</h1>
 
 <table style="font-size: 20px" id="t01">
@@ -66,11 +68,11 @@ a {
       
     </tr>
 	</c:forEach>
+	<tr>
+		<spring:message code="label.submit" var="btnlabel"/>
+		<td colspan="9"><input type="submit" value="${btnlabel}" style="height:50px;width:100%"></td>		
+	</tr>
 </table>
-
-<form:hidden path="delete"/>
-<spring:message code="label.submit" var="btnlabel"/>
-<input type="submit" value="${btnlabel}">
 
 </form:form>
 
