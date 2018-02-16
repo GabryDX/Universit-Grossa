@@ -140,4 +140,11 @@ public class Materia implements Serializable {
 		return matStudente;
 	}
 
+	@Override
+	public String toString() {
+		return "Materia [id=" + id + ", matAnnoCorso=" + matAnnoCorso + ", matCrediti=" + matCrediti + ", matNome="
+				+ matNome + ", matEsami=" + matEsami + ", matCorsoDiLaurea=" + matCorsoDiLaurea + ", matStudenti="
+				+ matStudenti + "]";
+	}
+
 }

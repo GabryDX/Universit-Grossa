@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 import java.util.concurrent.ThreadLocalRandom;
 
 import javax.persistence.EntityManager;
@@ -20,6 +21,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import it.corso.mvc.universita.dao.interfaces.ICorsiDiLaureaDao;
+import it.corso.mvc.universita.dao.interfaces.IMaterieDao;
 import it.corso.mvc.universita.dao.interfaces.IStudentiDao;
 import it.corso.mvc.universita.model.AnnoAccademico;
 import it.corso.mvc.universita.model.CorsoDiLaurea;
@@ -30,7 +32,7 @@ import it.corso.mvc.universita.model.Studente;
 @Repository
 public class StudentiDao implements IStudentiDao {
 
-	private final String[] nomeM = {"Achille","Alessandro","Benito","Dimitri","Fabio",
+	private final String[] nomeM = {"Achille","Alessandro","Antonio","Dimitri","Fabio",
 			"Franco","Gabriele","Giacomo","Giovanni","Jacopo","Lorenzo","Luca",
 			"Marco","Mario","Mattia","Mirko","Peter","Tommaso","Tony"};
 	private final String[] nomeF = {"Clara","Elisa","Lucia","Giulia","Maria",
@@ -38,7 +40,8 @@ public class StudentiDao implements IStudentiDao {
 	private final String[] cognome = {"Arceri","Astolfi","Berti","Bianchi","Bruni",
 			"Bruno","Carlino","de Meo","Di Tommasi","Favino","Ferrari","Gamella","Giorgi",
 			"Gjoni","Grasso","Lucarelli","Margiotta","Menestò","Messina","Neri",
-			"Nicosanti","Parker","Petrucci","Rossi","Savino","Stark","Valentini","Verdi"};
+			"Nicosanti","Parker","Petrucci","Rossi","Russo","Savino","Stark",
+			"Valentini","Verdi"};
 	private final String[] province = {"Agrigento","Alessandria","Ancona","Aosta",
 			"Aquila","Arezzo","Ascoli Piceno","Asti","Avellino","Bari","Belluno",
 			"Benevento","Bergamo","Biella","Bologna","Bolzano","Brescia","Brindisi",
@@ -56,12 +59,14 @@ public class StudentiDao implements IStudentiDao {
 			"Verbano-Cusio-Ossola","Vercelli","Verona","Vibo Valentia","Vicenza",
 	"Viterbo"};
 
-	private Logger logger = Logger.getLogger(StudentiDao.class);
+	private Logger logger = Logger.getLogger(StudentiDao.class); 
 
 	@PersistenceContext(unitName = "corsoroma") // lo ritroviamo in persistence.xml
 	private EntityManager session;
 	@Autowired
 	ICorsiDiLaureaDao cdlDao;
+	@Autowired
+	IMaterieDao matDao;
 
 	@Override
 	public Studente updateStu(Studente stu) {
@@ -160,7 +165,11 @@ public class StudentiDao implements IStudentiDao {
 		int rAA = ThreadLocalRandom.current().nextInt(2015, 2019);
 		AnnoAccademico aa = new AnnoAccademico(rAA);
 		s.setStuIscrizione(aa);
-		int rCdl = ThreadLocalRandom.current().nextInt(100, 106);
+		List<Materia> mats = session.createQuery(
+				"SELECT m FROM Materia m",
+				Materia.class)
+				.getResultList();
+		int rCdl = ThreadLocalRandom.current().nextInt(100, mats.size()+1);
 		s.setStuCorsoDiLaurea(cdlDao.search(rCdl));
 
 		s.setStuMaterie(new ArrayList<>());
@@ -342,9 +351,30 @@ public class StudentiDao implements IStudentiDao {
 				int rAA = ThreadLocalRandom.current().nextInt(2015, 2019);
 				AnnoAccademico aa = new AnnoAccademico(rAA);
 				s.setStuIscrizione(aa);
-				int rCdl = ThreadLocalRandom.current().nextInt(100, 106);
+				
+//				List<Materia> mats = session.createQuery(
+//						"SELECT m FROM Materia m",
+//						Materia.class)
+//						.getResultList();
+//				int rCdl = ThreadLocalRandom.current().nextInt(100, mats.size()+1);
+				
+				List<CorsoDiLaurea> corsi = cdlDao.readCdlAll();
+				int cdlMin = corsi.get(0).getCdlId();
+				int cdlMax = cdlMin + corsi.size();
+				int rCdl = ThreadLocalRandom.current().nextInt(cdlMin, cdlMax);
+				
 				s.setStuCorsoDiLaurea(cdlDao.search(rCdl));
-				s.setStuMaterie(new ArrayList<>());
+				
+				List<Materia> mats = matDao.readMatByCdlIdAndAa(rCdl, aa);
+				List<Materia> materie = new ArrayList<>();
+				int rMat;
+				for (Materia m : mats) {
+					logger.debug(m);
+					rMat = ThreadLocalRandom.current().nextInt(0, 5);
+					if (rMat == 0)
+						materie.add(m);
+				}
+				s.setStuMaterie(materie);
 
 				session.merge(s);
 			}

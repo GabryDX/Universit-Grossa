@@ -1,6 +1,7 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@taglib uri="http://www.springframework.org/tags" prefix="spring"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <html>
 <head>
 <link href="/corso/resources/css/grafica.css" rel="stylesheet" type="text/css">
@@ -34,7 +35,7 @@
       <td>${stu.stuNome}</td>
       <td>${stu.stuIscrizione}</td>
       <td>${stu.stuSesso}</td>
-      <td>${stu.stuDataNascita}</td>
+      <td><fmt:formatDate value="${stu.stuDataNascita}" pattern="dd/MM/yyyy" /></td>
       <td>${stu.stuLuogoNascita}</td>
       <td>${stu.stuCorsoDiLaurea.getCdlNome()}<br></td>
       

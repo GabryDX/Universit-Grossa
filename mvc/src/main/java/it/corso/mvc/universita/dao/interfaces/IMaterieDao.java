@@ -7,6 +7,7 @@ import it.corso.mvc.universita.model.CorsoDiLaurea;
 import it.corso.mvc.universita.model.Materia;
 
 public interface IMaterieDao {
+	
 	public List<Materia> readMatByCdlIdAndAa(int cdlId,
 			AnnoAccademico aa);
 
