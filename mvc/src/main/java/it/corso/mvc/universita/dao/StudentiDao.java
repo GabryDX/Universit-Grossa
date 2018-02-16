@@ -30,16 +30,15 @@ import it.corso.mvc.universita.model.Studente;
 @Repository
 public class StudentiDao implements IStudentiDao {
 
-	private final String[] nomeM = {"Benito","Fabio","Alessandro","Gabriele","Jacopo",
-			"Dimitri","Lorenzo","Giacomo","Giovanni","Mattia","Mirko","Peter","Achille",
-	"Tony"};
-	private final String[] nomeF = {"Valentina","Valdete","Marta","Lucia","Silvia",
-			"Giulia","Maria"};
-	private final String[] cognome = {"Arceri","Gamella","Giorgi","Lucarelli","Messina",
-			"Nicosanti","Petrucci","Bruni","Menestò","Parker","Valentini","Bruno",
-			"Rossi","Bianchi","Astolfi","Stark","Di Tommasi","Margiotta","Gjoni",
-			"Grasso","Ferrari",
-	"de Meo"};
+	private final String[] nomeM = {"Achille","Alessandro","Benito","Dimitri","Fabio",
+			"Franco","Gabriele","Giacomo","Giovanni","Jacopo","Lorenzo","Luca",
+			"Marco","Mario","Mattia","Mirko","Peter","Tommaso","Tony"};
+	private final String[] nomeF = {"Clara","Elisa","Lucia","Giulia","Maria",
+			"Marta","Roberta","Silvia","Valdete","Valentina"};
+	private final String[] cognome = {"Arceri","Astolfi","Berti","Bianchi","Bruni",
+			"Bruno","Carlino","de Meo","Di Tommasi","Favino","Ferrari","Gamella","Giorgi",
+			"Gjoni","Grasso","Lucarelli","Margiotta","Menestò","Messina","Neri",
+			"Nicosanti","Parker","Petrucci","Rossi","Savino","Stark","Valentini","Verdi"};
 	private final String[] province = {"Agrigento","Alessandria","Ancona","Aosta",
 			"Aquila","Arezzo","Ascoli Piceno","Asti","Avellino","Bari","Belluno",
 			"Benevento","Bergamo","Biella","Bologna","Bolzano","Brescia","Brindisi",
