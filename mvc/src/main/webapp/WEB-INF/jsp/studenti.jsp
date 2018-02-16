@@ -16,21 +16,23 @@
       <th>Matricola</th>
       <th>Cognome</th>
       <th>Nome</th>
-      <th>Data d'iscrizione</th>
+      <th>Iscrizione</th>
       <th>Sesso</th>
       <th>Data di nascita</th>
       <th>Luogo di nascita</th>
+      <th>Codice fiscale</th>
       <th>Corso di laurea</th>
     </tr>
   <c:forEach var="stu" items="${stuList}">
   	<tr align="left">
   	  <td>${stu.stuMatricola}</td>
-      <td><a href="https://www.google.it/search?q=${stu.getStuCognome()}+${stu.getStuNome()}">${stu.getStuCognome()}</a></td>
+      <td><a href="https://www.google.it/search?q=${stu.stuCognome}+${stu.stuNome}">${stu.stuCognome}</a></td>
       <td>${stu.stuNome}</td>
       <td>${stu.stuIscrizione}</td>
       <td>${stu.stuSesso}</td>
       <td>${stu.stuDataNascita}</td>
       <td>${stu.stuLuogoNascita}</td>
+      <td>${stu.stuCodiceFiscale}</td>
       <td>${stu.stuCorsoDiLaurea.getCdlNome()}<br></td>
       
     </tr>

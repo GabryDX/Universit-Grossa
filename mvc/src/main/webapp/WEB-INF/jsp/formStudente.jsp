@@ -18,27 +18,27 @@
 		</tr> --%>
 		<tr>
 			<td><form:label path="studente.stuCognome"><b>Cognome</b></form:label></td>
-			<td><form:input path="studente.stuCognome"/></td>
-			<td><form:errors path="studente.stuCognome"/></td>
+			<td><form:input path="studente.stuCognome"/>
+				<form:errors path="studente.stuCognome"/></td>
 		</tr>
 		<tr>
 			<td><form:label path="studente.stuNome"><b>Nome</b></form:label></td>
-			<td><form:input path="studente.stuNome"/></td>
-			<td><form:errors path="studente.stuNome"/></td>
+			<td><form:input path="studente.stuNome"/>
+				<form:errors path="studente.stuNome"/></td>
 		</tr>
 		<%-- <tr>
-			<td><form:label path="stuDataNascita">Data di nascita</form:label></td>
-			<td><form:input path="stuDataNascita"/></td>
+			<td><form:label path="studente.stuDataNascita">Data di nascita</form:label></td>
+			<td><form:input path="studente.stuDataNascita"/></td>
 		</tr>
 		<tr>
-			<td><form:label path="stuLuogoNascita">Luogo di nascita</form:label></td>
-			<td><form:input path="stuLuogoNascita"/></td>
+			<td><form:label path="studente.stuLuogoNascita">Luogo di nascita</form:label></td>
+			<td><form:input path="studente.stuLuogoNascita"/></td>
 		</tr> --%>
 		<tr>
 			<td><b>Sesso</b></td>
-			<td>Maschio<form:radiobutton path="studente.stuSesso" value="M"/></td>
-			<td>Femmina<form:radiobutton path="studente.stuSesso" value="F"/></td>
-			<td><form:errors path="studente.stuSesso"/></td>
+			<td>Maschio<form:radiobutton path="studente.stuSesso" value="M"/>
+				Femmina<form:radiobutton path="studente.stuSesso" value="F"/>
+				<form:errors path="studente.stuSesso"/></td>
 		</tr>
 		<%-- <tr>
 			<td><form:label path="stuIscrizione">Iscrizione</form:label></td>

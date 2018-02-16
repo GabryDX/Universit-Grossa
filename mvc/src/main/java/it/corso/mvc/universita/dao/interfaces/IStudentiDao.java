@@ -12,6 +12,8 @@ public interface IStudentiDao {
 	public Studente createStu(String stuCognome, String stuNome,
 			String stuSesso, AnnoAccademico stuIscrizione,
 			CorsoDiLaurea stuCorsoDiLaurea);
+	
+	public Studente createRandomStu();
 
 	public Studente createIscrizione(int stuMatricola, int matId,
 			AnnoAccademico matAnnoAccademico);
@@ -24,5 +26,11 @@ public interface IStudentiDao {
 
 	public boolean deleteAllStu(String stuCognome, String stuNome, String stuSesso, AnnoAccademico stuIscrizione,
 			CorsoDiLaurea stuCorsoDiLaurea);
+
+	public List<Studente> popolaStudenti();
+
+	public List<Studente> popolaStudentiPlus();
+
+	
 	
 }

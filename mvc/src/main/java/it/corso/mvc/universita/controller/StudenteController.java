@@ -125,4 +125,28 @@ public class StudenteController {
 		ModelAndView modelAndView = new ModelAndView("studenti", "stuList", stuList);
 		return modelAndView;
 	}
+	
+	@RequestMapping(value="aggiungiStudenteRandom",method = RequestMethod.GET)
+	public ModelAndView aggiungiStudenteRandom() {
+		Studente stu = stuDao.createRandomStu();
+		ModelAndView modelAndView = new ModelAndView("formStudenteResult", "stu", stu);
+		return modelAndView;
+	}
+	
+	@RequestMapping(value="popola",method = RequestMethod.GET)
+	public ModelAndView popolaStudenti() {
+		List<Studente> stuLista = stuDao.popolaStudenti();
+		
+		ModelAndView modelAndView = new ModelAndView("studenti", "stuList", stuLista);
+		return modelAndView;
+	}
+	
+	@RequestMapping(value="popolaPlus",method = RequestMethod.GET)
+	public ModelAndView popolaStudentiPlus() {
+		List<Studente> stuLista = stuDao.popolaStudentiPlus();
+		
+		ModelAndView modelAndView = new ModelAndView("studenti", "stuList", stuLista);
+		return modelAndView;
+	}
+	
 }

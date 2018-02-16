@@ -1,7 +1,13 @@
 package it.corso.mvc.universita.dao;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
+import java.util.concurrent.ThreadLocalRandom;
 
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
@@ -9,9 +15,11 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.PersistenceException;
 
 import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import it.corso.mvc.universita.dao.interfaces.ICorsiDiLaureaDao;
 import it.corso.mvc.universita.dao.interfaces.IStudentiDao;
 import it.corso.mvc.universita.model.AnnoAccademico;
 import it.corso.mvc.universita.model.CorsoDiLaurea;
@@ -21,10 +29,40 @@ import it.corso.mvc.universita.model.Studente;
 
 @Repository
 public class StudentiDao implements IStudentiDao {
+
+	private final String[] nomeM = {"Benito","Fabio","Alessandro","Gabriele","Jacopo",
+			"Dimitri","Lorenzo","Giacomo","Giovanni","Mattia","Mirko","Peter","Achille",
+	"Tony"};
+	private final String[] nomeF = {"Valentina","Valdete","Marta","Lucia","Silvia",
+			"Giulia","Maria"};
+	private final String[] cognome = {"Arceri","Gamella","Giorgi","Lucarelli","Messina",
+			"Nicosanti","Petrucci","Bruni","Menestò","Parker","Valentini","Bruno",
+			"Rossi","Bianchi","Astolfi","Stark","Di Tommasi","Margiotta","Gjoni",
+			"Grasso","Ferrari",
+	"de Meo"};
+	private final String[] province = {"Agrigento","Alessandria","Ancona","Aosta",
+			"Aquila","Arezzo","Ascoli Piceno","Asti","Avellino","Bari","Belluno",
+			"Benevento","Bergamo","Biella","Bologna","Bolzano","Brescia","Brindisi",
+			"Cagliari","Caltanissetta","Campobasso","Caserta","Catania","Catanzaro",
+			"Chieti","Como","Cosenza","Cremona","Crotone","Cuneo","Enna","Ferrara",
+			"Firenze","Foggia","Forlì e Cesena","Frosinone","Genova","Gorizia","Grosseto",
+			"Imperia","Isernia","La Spezia","Latina","Lecce","Lecco","Livorno","Lodi",
+			"Lucca","Macerata","Mantova","Massa-Carrara","Matera","Messina","Milano",
+			"Modena","Napoli","Novara","Nuoro","Oristano","Padova","Palermo","Parma",
+			"Pavia","Perugia","Pesaro e Urbino","Pescara","Piacenza","Pisa","Pistoia",
+			"Pordenone","Potenza","Prato","Ragusa","Ravenna","Reggio Calabria",
+			"Reggio Emilia","Rieti","Rimini","Roma","Rovigo","Salerno","Sassari",
+			"Savona","Siena","Siracusa","Sondrio","Taranto","Teramo","Terni","Torino",
+			"Trapani","Trento","Treviso","Trieste","Udine","Varese","Venezia",
+			"Verbano-Cusio-Ossola","Vercelli","Verona","Vibo Valentia","Vicenza",
+	"Viterbo"};
+
 	private Logger logger = Logger.getLogger(StudentiDao.class);
 
 	@PersistenceContext(unitName = "corsoroma") // lo ritroviamo in persistence.xml
 	private EntityManager session;
+	@Autowired
+	ICorsiDiLaureaDao cdlDao;
 
 	@Override
 	public Studente updateStu(Studente stu) {
@@ -55,7 +93,7 @@ public class StudentiDao implements IStudentiDao {
 		if (stuCognome.trim().length() < 2
 				|| stuNome.trim().length() < 2)
 			throw new IllegalArgumentException();
-		// 3) il parametro stuSesso può essere solo M o F
+		// 3) il parametro stuSesso puÃ² essere solo M o F
 		if (!stuSesso.equals("M") && !stuSesso.equals("F"))
 			throw new IllegalArgumentException();
 		int maxStuMatricola = session.createQuery(
@@ -77,16 +115,73 @@ public class StudentiDao implements IStudentiDao {
 	}
 
 	@Override
+	@Transactional
+	public Studente createRandomStu() {
+		int maxStuMatricola = session.createQuery(
+				"SELECT max(s.stuMatricola) FROM Studente s",
+				Integer.class).getSingleResult();
+
+		int stuMatricola = maxStuMatricola + 1;
+		Studente s = new Studente();
+		s.setStuMatricola(stuMatricola);
+
+		int r1;
+		int r2;
+		s.setStuMatricola(stuMatricola);
+		int nomeMl = nomeM.length;
+		int nomeFl = nomeF.length;
+		int nomil = nomeMl + nomeFl;
+		r1 = ThreadLocalRandom.current().nextInt(0, nomil);
+		if (r1<nomeMl) {
+			r2 = ThreadLocalRandom.current().nextInt(0, nomeMl);
+			s.setStuNome(nomeM[r2]);
+			s.setStuSesso("M");
+		} else {
+			r2 = ThreadLocalRandom.current().nextInt(0, nomeFl);
+			s.setStuNome(nomeF[r2]);
+			s.setStuSesso("F");
+		}
+		r2 = ThreadLocalRandom.current().nextInt(0, cognome.length);
+		s.setStuCognome(cognome[r2]);
+		r2 = ThreadLocalRandom.current().nextInt(0, province.length);
+		s.setStuLuogoNascita(province[r2]);
+
+		int anno = ThreadLocalRandom.current().nextInt(1950, 2000);
+		int mese = ThreadLocalRandom.current().nextInt(1, 13);
+		int giorno = ThreadLocalRandom.current().nextInt(1, 30);
+		DateFormat format = new SimpleDateFormat("yyyy-MM-dd", Locale.ITALY);
+		Date dataNascita;
+		try {
+			dataNascita = format.parse(anno+"-"+mese+"-"+giorno);
+			s.setStuDataNascita(dataNascita);
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+
+		int rAA = ThreadLocalRandom.current().nextInt(2015, 2019);
+		AnnoAccademico aa = new AnnoAccademico(rAA);
+		s.setStuIscrizione(aa);
+		int rCdl = ThreadLocalRandom.current().nextInt(100, 106);
+		s.setStuCorsoDiLaurea(cdlDao.search(rCdl));
+
+		s.setStuMaterie(new ArrayList<>());
+		session.persist(s);
+		logger.info(String.format("Creato stu con matricola %d",
+				stuMatricola));
+		return s;
+	}
+
+	@Override
 	public Studente createIscrizione(int stuMatricola, int matId,
 			AnnoAccademico matAnnoAccademico) {
 		// VERIFICA FORMALE
 		if (matAnnoAccademico == null)
 			throw new NullPointerException();
 		// ATTENZIONE
-		// c'è una verifica che non è formale, vale a dire
+		// c'Ã¨ una verifica che non Ã¨ formale, vale a dire
 		// posso verificarla solamente dopo aver letto i dati
 		// sul DB
-		// il vincolo è che uno studente non può iscriversi
+		// il vincolo Ã¨ che uno studente non puÃ² iscriversi
 		// a una materia per un anno di corso successivo a 
 		// quello in cui lo studente si trova iscritto
 		// vedi dopo
@@ -100,16 +195,16 @@ public class StudentiDao implements IStudentiDao {
 					.createQuery(
 							"SELECT m FROM Materia m"
 									+ " WHERE m.id = :id",
-							Materia.class)
+									Materia.class)
 					.setParameter("id", id).getSingleResult();
 			// PRIMA di aggiungere la materia
 			// verifico il vincolo sui dati (vedi sopra)
 			int stuAnnoCorso = matAnnoAccademico.getAnno()
 					- stu.getStuIscrizione().getAnno() + 1;
-			// IN realtà dovremmo definire una nostra
+			// IN realtÃ  dovremmo definire una nostra
 			// eccezione che estende PersistenceException
 			// diciamo che a livello del nostro corso
-			// va bene così
+			// va bene cosÃ¬
 			if (stuAnnoCorso < mat.getMatAnnoCorso())
 				throw new PersistenceException();
 			// ok proseguire
@@ -128,7 +223,7 @@ public class StudentiDao implements IStudentiDao {
 				.getResultList();
 		return stus;
 	}
-	
+
 	@Override
 	public Studente getStudente(int stuMatricola) {
 		Studente stu = session
@@ -139,7 +234,7 @@ public class StudentiDao implements IStudentiDao {
 				.getSingleResult();
 		return stu;
 	}
-	
+
 	@Override
 	@Transactional
 	public boolean deleteStu(int stuMatricola) {
@@ -148,8 +243,8 @@ public class StudentiDao implements IStudentiDao {
 			stu = session
 					.createQuery(
 							"SELECT s FROM Studente s"
-							+ " WHERE s.stuMatricola = :stuMatricola",
-							Studente.class)
+									+ " WHERE s.stuMatricola = :stuMatricola",
+									Studente.class)
 					.setParameter("stuMatricola", stuMatricola)
 					.getSingleResult();
 			session.remove(stu);
@@ -160,7 +255,7 @@ public class StudentiDao implements IStudentiDao {
 			return false;
 		}
 	}
-	
+
 	@Override
 	@Transactional
 	public boolean deleteAllStu(String stuCognome, String stuNome,
@@ -177,7 +272,7 @@ public class StudentiDao implements IStudentiDao {
 		if (stuCognome.trim().length() < 2
 				|| stuNome.trim().length() < 2)
 			throw new IllegalArgumentException();
-		// 3) il parametro stuSesso pu� essere solo M o F
+		// 3) il parametro stuSesso può essere solo M o F
 		if (!stuSesso.equals("M") && !stuSesso.equals("F"))
 			throw new IllegalArgumentException();
 
@@ -186,9 +281,9 @@ public class StudentiDao implements IStudentiDao {
 			stu = session
 					.createQuery(
 							"SELECT s FROM Studente s"
-							+ " WHERE s.stuCognome = :stuCognome"
-							+ " AND s.stuNome = :stuNome",
-							Studente.class)
+									+ " WHERE s.stuCognome = :stuCognome"
+									+ " AND s.stuNome = :stuNome",
+									Studente.class)
 					.setParameter("stuCognome", stuCognome)
 					.setParameter("stuNome", stuNome)
 					.getResultList();
@@ -197,9 +292,80 @@ public class StudentiDao implements IStudentiDao {
 		}
 		for (Studente s : stu)
 			session.remove(s);
-			logger.info(String.format(
+		logger.info(String.format(
 				"Cancellato stu %s %s", stuCognome, stuNome));
 		return true;
-
 	}
+
+	@Override
+	@Transactional
+	public List<Studente> popolaStudenti() {
+		List<Studente> stus = new ArrayList<Studente>();
+		try {
+			stus = session.createQuery(
+					"SELECT s FROM Studente s",
+					Studente.class)
+					.getResultList();
+
+			int r1;
+			int r2;
+			for (Studente s : stus) {
+				int nomeMl = nomeM.length;
+				int nomeFl = nomeF.length;
+				int nomil = nomeMl + nomeFl;
+				r1 = ThreadLocalRandom.current().nextInt(0, nomil);
+				if (r1<nomeMl) {
+					r2 = ThreadLocalRandom.current().nextInt(0, nomeMl);
+					s.setStuNome(nomeM[r2]);
+					s.setStuSesso("M");
+				} else {
+					r2 = ThreadLocalRandom.current().nextInt(0, nomeFl);
+					s.setStuNome(nomeF[r2]);
+					s.setStuSesso("F");
+				}
+				r2 = ThreadLocalRandom.current().nextInt(0, cognome.length);
+				s.setStuCognome(cognome[r2]);
+				r2 = ThreadLocalRandom.current().nextInt(0, province.length);
+				s.setStuLuogoNascita(province[r2]);
+
+				int anno = ThreadLocalRandom.current().nextInt(1950, 2000);
+				int mese = ThreadLocalRandom.current().nextInt(1, 13);
+				int giorno = ThreadLocalRandom.current().nextInt(1, 30);
+				DateFormat format = new SimpleDateFormat("yyyy-MM-dd", Locale.ITALY);
+				Date dataNascita;
+				try {
+					dataNascita = format.parse(anno+"-"+mese+"-"+giorno);
+					s.setStuDataNascita(dataNascita);
+				} catch (ParseException e) {
+					e.printStackTrace();
+				}
+
+				int rAA = ThreadLocalRandom.current().nextInt(2015, 2019);
+				AnnoAccademico aa = new AnnoAccademico(rAA);
+				s.setStuIscrizione(aa);
+				int rCdl = ThreadLocalRandom.current().nextInt(100, 106);
+				s.setStuCorsoDiLaurea(cdlDao.search(rCdl));
+				s.setStuMaterie(new ArrayList<>());
+
+				session.merge(s);
+			}
+
+		} catch (NoResultException e) {
+
+		}
+
+		return stus;
+	}
+
+	@Override
+	@Transactional
+	public List<Studente> popolaStudentiPlus() {
+		List<Studente> stus = new ArrayList<Studente>();
+
+		for (int i=0; i<100; i++) {
+			stus.add(createRandomStu());
+		}
+		return stus;
+	}
+
 }

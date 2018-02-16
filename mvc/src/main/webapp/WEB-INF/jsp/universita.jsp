@@ -30,6 +30,7 @@ body {
   <li><a href="/corso/universita/materie"><spring:message code="label.materie"/></a></li>
   <li><a href="/corso/universita/corsoform"><spring:message code="label.corso.cerca"/></a></li>
   <li><a href="/corso/universita/aggiungiStudente"><spring:message code="label.studente.add"/></a></li>
+  <li><a href="/corso/universita/aggiungiStudenteRandom"><spring:message code="label.studente.addr"/></a></li>
   <li><a href="/corso/universita/cercaStudente"><spring:message code="label.studente.remove"/></a></li>
   <li><a href="/corso/hello"><spring:message code="label.ciao"/></a></li>
   <li><a href="/corso/book/get"><spring:message code="label.libro"/></a></li>
