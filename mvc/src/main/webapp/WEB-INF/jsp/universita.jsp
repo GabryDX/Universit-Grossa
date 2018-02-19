@@ -3,13 +3,13 @@
 <%@taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <html>
 <head>
-<link href="/corso/resources/css/grafica.css" rel="stylesheet" type="text/css">
+	<link href="/corso/resources/css/grafica.css" rel="stylesheet" type="text/css">
 </head>
 <body>
 <img width="100" align=right src="https://image.spreadshirtmedia.com/image-server/v1/mp/designs/103850169,width=178,height=178/illuminatipng-long-sleeve-shirts.png">
-<p style="font-size: 100px" align="center"><spring:message code="label.universita"/></p>
+<p id="uni"><spring:message code="label.universita"/></p>
 
-<!-- <h1 align="center">Addestriamo le menti del futuro</h1> -->
+<h1 id="st"><spring:message code="label.menti"/></h1>
 
 <ul>
   <li><a href="/corso/universita/studenti"><spring:message code="label.studenti"/></a></li>

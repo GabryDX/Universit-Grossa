@@ -7,13 +7,13 @@
 </head>
 <body>
 <img width="100" align=right src="https://image.spreadshirtmedia.com/image-server/v1/mp/designs/103850169,width=178,height=178/illuminatipng-long-sleeve-shirts.png">
-<p style="font-size: 100px" align="center">UNIVERSITÀ GROSSA</p>
+<p id="uni">UNIVERSITÀ GROSSA</p>
 <!--  <h2>Corso di Laurea: ${corsoDiLaurea.get(0).cdlNome}</h2>
 <h2>ID: ${corsoDiLaurea.get(0).cdlId}</h2> -->
 
 <h1>Numero corsi: ${corsi.size()}</h1>
 
-<table style="font-size: 30px" id="t01">
+<table style="font-size: 30px" class="t01">
     <tr align="left">
       <th>ID</th>
       <th>Nome</th>

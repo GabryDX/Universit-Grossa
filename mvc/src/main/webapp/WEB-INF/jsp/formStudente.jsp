@@ -7,7 +7,7 @@
 </head>
 <body>
 <img width="100" align=right src="https://image.spreadshirtmedia.com/image-server/v1/mp/designs/103850169,width=178,height=178/illuminatipng-long-sleeve-shirts.png">
-<p style="font-size: 100px" align="center">UNIVERSITÀ GROSSA</p>
+<p id="uni">UNIVERSITÀ GROSSA</p>
 
 <h2>Aggiungi un nuovo studente:<br></h2>
 <form:form method="POST" action="/corso/universita/studentequery" modelAttribute="stucdl">

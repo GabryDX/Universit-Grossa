@@ -29,7 +29,7 @@ function check(event) {
 <body>
 	<img width="100" align=right
 		src="https://image.spreadshirtmedia.com/image-server/v1/mp/designs/103850169,width=178,height=178/illuminatipng-long-sleeve-shirts.png">
-	<p style="font-size: 100px" align="center">UNIVERSITÀ GROSSA</p>
+	<p id="uni">UNIVERSITÀ GROSSA</p>
 
 	<%-- <h1>Numero studenti: ${stuList.size()}</h1> --%>
 
@@ -38,7 +38,7 @@ function check(event) {
 		
 		<form:hidden path="delete" id="lista" />
 		
-		<table style="font-size: 20px" id="t01">
+		<table style="font-size: 20px" class="t01">
 			<tr align="left">
 				<th></th>
 				<th>Matricola</th>

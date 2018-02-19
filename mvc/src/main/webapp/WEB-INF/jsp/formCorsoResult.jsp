@@ -8,7 +8,7 @@
 </head>
 <body>
 <img width="100" align=right src="https://image.spreadshirtmedia.com/image-server/v1/mp/designs/103850169,width=178,height=178/illuminatipng-long-sleeve-shirts.png">
-<p style="font-size: 100px" align="center">UNIVERSITÀ GROSSA</p>
+<p id="uni">UNIVERSITÀ GROSSA</p>
 
 <h2>Corso di Laurea: ${cm.cdl.cdlNome}</h2>
 <h2>ID: ${cm.cdl.cdlId}</h2>
@@ -16,7 +16,7 @@
 <h2>Studenti iscritti: ${cm.cdl.cdlStudenti.size()}</h2>
 <h2>Materie: ${cm.mats.size()}</h2>
 
-<table style="font-size: 20px" id="t01">
+<table style="font-size: 20px" class="t01">
     <tr align="left">
       <th>Matricola</th>
       <th>Cognome</th>
