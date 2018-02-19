@@ -7,32 +7,43 @@
 <link href="/corso/resources/css/grafica.css" rel="stylesheet" type="text/css">
 </head>
 <body>
-<img width="100" align=right src="https://image.spreadshirtmedia.com/image-server/v1/mp/designs/103850169,width=178,height=178/illuminatipng-long-sleeve-shirts.png">
-<p id="uni">UNIVERSITÀ GROSSA</p>
+<a href="../universita">
+	<img width="100" align=right src="https://image.spreadshirtmedia.com/image-server/v1/mp/designs/103850169,width=178,height=178/illuminatipng-long-sleeve-shirts.png">
+</a>
+<p id="uni"><spring:message code="label.universita"/></p>
 
 <table style="font-size: 30px" class="t01">
     <tr align="left">
       <th>Matricola</th>
       <th>Cognome</th>
       <th>Nome</th>
-      <!-- <th>Data di nascita</th> -->
-      <th>Data d'iscrizione</th>
-      <th>Sesso</th>
-      <!-- <th>Luogo di nascita</th>
-      <th>Link</th> -->
-      <th>Corso di Laurea</th>
+      
     </tr>
   	<tr align="left">
-  	  <td>${stu.getStuMatricola()}</td>
-      <td>${stu.getStuCognome()}</td>
-      <td>${stu.getStuNome()}</td>
-      <td><fmt:formatDate value="${stu.stuDataNascita}" pattern="dd/MM/yyyy" /></td>
-      <td>${stu.getStuIscrizione()}</td>
-      <td>${stu.getStuSesso()}</td>
-      <td>${stu.getStuCorsoDiLaurea().getCdlNome()}</td>
-      <%-- <td>${stu.getStuLuogoNascita()}</td>
-      <td><a href="https://www.google.it/search?q=${stu.getStuCognome()}">${stu.getStuCognome()}</a><br></td> --%>
+  	  <td>${stu.stuMatricola}</td>
+      <td><a href="https://www.google.it/search?q=${stu.stuCognome}+${stu.stuNome}">${stu.stuCognome}</a></td>
+      <td>${stu.stuNome}</td>
+  	</tr>
+  	<tr align="left">
+  	  <th>Iscrizione</th>
+      <th>Sesso</th>
+      <th>Data di nascita</th>
     </tr>
+    <tr align="left">
+      <td>${stu.stuIscrizione}</td>
+      <td>${stu.stuSesso}</td>
+      <td><fmt:formatDate value="${stu.stuDataNascita}" pattern="dd/MM/yyyy" /></td>
+  	</tr>
+  	<tr align="left">
+      <th>Luogo di nascita</th>
+      <th>Codice fiscale</th>
+      <th>Corso di laurea</th>
+    </tr>
+    <tr align="left">
+      <td>${stu.stuLuogoNascita}</td>
+      <td>${stu.stuCodiceFiscale}</td>
+      <td>${stu.stuCorsoDiLaurea.getCdlNome()}<br></td>  
+  	</tr>
 </table>
 
 </body>

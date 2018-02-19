@@ -3,11 +3,20 @@
 <%@taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <html>
 <head>
-	<link href="/corso/resources/css/grafica.css" rel="stylesheet" type="text/css">
+	<script>
+	function on() {
+  		document.getElementById("overlay").style.display = "block";
+	}
+
+	function off() {
+    	document.getElementById("overlay").style.display = "none";
+	}
+	</script>
+	<link href="${pageContext.request.contextPath}/resources/css/grafica.css" rel="stylesheet" type="text/css">
 </head>
 <body>
-<img width="100" align=right src="https://image.spreadshirtmedia.com/image-server/v1/mp/designs/103850169,width=178,height=178/illuminatipng-long-sleeve-shirts.png">
-<p id="uni"><spring:message code="label.universita"/></p>
+<img width="100" align=right src="/corso/resources/images/illuminati.png">
+<p id="uni" onclick="on()"><spring:message code="label.universita"/></p>
 
 <h1 id="st"><spring:message code="label.menti"/></h1>
 
@@ -22,6 +31,20 @@
   <li><a href="/corso/hello"><spring:message code="label.ciao"/></a></li>
   <li><a href="/corso/book/get"><spring:message code="label.libro"/></a></li>
 </ul>
+
+<a href="?lang=it">
+	<img width="100" src="/corso/resources/images/Italy Flag.png">
+</a>
+<a href="?lang=en">
+	<img width="100" src="/corso/resources/images/Dhekelia Flag.png">
+</a>
+<!-- <a href=".">
+	<img src="https://raw.githubusercontent.com/diegocsandrim/sharp-test/master/output1.png">
+</a> -->
+
+<div id="overlay" onclick="off()">
+  <div id="text">Messaggio segreto trovato. Stampa laurea in corso.</div>
+</div>
 
 </body>
 </html>

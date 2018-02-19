@@ -6,8 +6,10 @@
 <link href="/corso/resources/css/grafica.css" rel="stylesheet" type="text/css">
 </head>
 <body>
-<img width="100" align=right src="https://image.spreadshirtmedia.com/image-server/v1/mp/designs/103850169,width=178,height=178/illuminatipng-long-sleeve-shirts.png">
-<p id="uni">UNIVERSITÀ GROSSA</p>
+<a href="../universita">
+	<img width="100" align=right src="https://image.spreadshirtmedia.com/image-server/v1/mp/designs/103850169,width=178,height=178/illuminatipng-long-sleeve-shirts.png">
+</a>
+<p id="uni"><spring:message code="label.universita"/></p>
 <!--  <h2>Corso di Laurea: ${corsoDiLaurea.get(0).cdlNome}</h2>
 <h2>ID: ${corsoDiLaurea.get(0).cdlId}</h2> -->
 

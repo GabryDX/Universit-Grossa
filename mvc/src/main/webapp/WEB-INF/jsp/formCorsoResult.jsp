@@ -7,8 +7,10 @@
 <link href="/corso/resources/css/grafica.css" rel="stylesheet" type="text/css">
 </head>
 <body>
-<img width="100" align=right src="https://image.spreadshirtmedia.com/image-server/v1/mp/designs/103850169,width=178,height=178/illuminatipng-long-sleeve-shirts.png">
-<p id="uni">UNIVERSITÀ GROSSA</p>
+<a href="../universita">
+	<img width="100" align=right src="https://image.spreadshirtmedia.com/image-server/v1/mp/designs/103850169,width=178,height=178/illuminatipng-long-sleeve-shirts.png">
+</a>
+<p id="uni"><spring:message code="label.universita"/></p>
 
 <h2>Corso di Laurea: ${cm.cdl.cdlNome}</h2>
 <h2>ID: ${cm.cdl.cdlId}</h2>
@@ -41,7 +43,7 @@
 
 <br><br><br>
 
-<table style="font-size: 20px" id="t01">
+<table style="font-size: 20px" class="t01">
     <tr align="left">
       <th>ID</th>
       <th>Materia</th>

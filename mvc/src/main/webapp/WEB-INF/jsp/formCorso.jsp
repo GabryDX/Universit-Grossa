@@ -6,7 +6,9 @@
 <link href="/corso/resources/css/grafica.css" rel="stylesheet" type="text/css">
 </head>
 <body>
-<img width="100" align=right src="https://image.spreadshirtmedia.com/image-server/v1/mp/designs/103850169,width=178,height=178/illuminatipng-long-sleeve-shirts.png">
+<a href="../universita">
+	<img width="100" align=right src="https://image.spreadshirtmedia.com/image-server/v1/mp/designs/103850169,width=178,height=178/illuminatipng-long-sleeve-shirts.png">
+</a>
 <p id="uni"><spring:message code="label.universita"/></p>
 
 <h2><spring:message code="label.corso.titolo"/><br></h2>

@@ -27,9 +27,10 @@ function check(event) {
 
 </head>
 <body>
-	<img width="100" align=right
-		src="https://image.spreadshirtmedia.com/image-server/v1/mp/designs/103850169,width=178,height=178/illuminatipng-long-sleeve-shirts.png">
-	<p id="uni">UNIVERSITÀ GROSSA</p>
+	<a href="../universita">
+		<img width="100" align=right src="https://image.spreadshirtmedia.com/image-server/v1/mp/designs/103850169,width=178,height=178/illuminatipng-long-sleeve-shirts.png">
+	</a>
+	<p id="uni"><spring:message code="label.universita"/></p>
 
 	<%-- <h1>Numero studenti: ${stuList.size()}</h1> --%>
 

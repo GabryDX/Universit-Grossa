@@ -7,7 +7,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
-import java.util.Map;
 import java.util.concurrent.ThreadLocalRandom;
 
 import javax.persistence.EntityManager;
@@ -165,14 +164,25 @@ public class StudentiDao implements IStudentiDao {
 		int rAA = ThreadLocalRandom.current().nextInt(2015, 2019);
 		AnnoAccademico aa = new AnnoAccademico(rAA);
 		s.setStuIscrizione(aa);
-		List<Materia> mats = session.createQuery(
-				"SELECT m FROM Materia m",
-				Materia.class)
-				.getResultList();
-		int rCdl = ThreadLocalRandom.current().nextInt(100, mats.size()+1);
+
+		List<CorsoDiLaurea> corsi = cdlDao.readCdlAll();
+		int cdlMin = corsi.get(0).getCdlId();
+		int cdlMax = cdlMin + corsi.size();
+		int rCdl = ThreadLocalRandom.current().nextInt(cdlMin, cdlMax);
+		
 		s.setStuCorsoDiLaurea(cdlDao.search(rCdl));
 
-		s.setStuMaterie(new ArrayList<>());
+		List<Materia> mats = matDao.readMatByCdlIdAndAa(rCdl, aa);
+		List<Materia> materie = new ArrayList<>();
+		int rMat;
+		for (Materia m : mats) {
+			logger.debug(m);
+			rMat = ThreadLocalRandom.current().nextInt(0, 5);
+			if (rMat == 0)
+				materie.add(m);
+		}
+		s.setStuMaterie(materie);
+		
 		session.persist(s);
 		logger.info(String.format("Creato stu con matricola %d",
 				stuMatricola));
@@ -352,12 +362,6 @@ public class StudentiDao implements IStudentiDao {
 				AnnoAccademico aa = new AnnoAccademico(rAA);
 				s.setStuIscrizione(aa);
 				
-//				List<Materia> mats = session.createQuery(
-//						"SELECT m FROM Materia m",
-//						Materia.class)
-//						.getResultList();
-//				int rCdl = ThreadLocalRandom.current().nextInt(100, mats.size()+1);
-				
 				List<CorsoDiLaurea> corsi = cdlDao.readCdlAll();
 				int cdlMin = corsi.get(0).getCdlId();
 				int cdlMax = cdlMin + corsi.size();
@@ -370,7 +374,7 @@ public class StudentiDao implements IStudentiDao {
 				int rMat;
 				for (Materia m : mats) {
 					logger.debug(m);
-					rMat = ThreadLocalRandom.current().nextInt(0, 5);
+					rMat = ThreadLocalRandom.current().nextInt(0, 4); //25%
 					if (rMat == 0)
 						materie.add(m);
 				}
