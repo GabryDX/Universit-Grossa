@@ -38,6 +38,13 @@ public class StudenteController {
 		ModelAndView modelAndView = new ModelAndView("studenti", "stuList", stuLista);
 		return modelAndView;
 	}
+	
+	@RequestMapping(value="studenti2",method = RequestMethod.GET)
+	public ModelAndView getStudenti2() {
+		List<Studente> stuLista = stuDao.getStudenti();
+		ModelAndView modelAndView = new ModelAndView("studenti2", "stuList", stuLista);
+		return modelAndView;
+	}
 
 	@RequestMapping(value="aggiungiStudente",method = RequestMethod.GET)
 	public ModelAndView setStudente() {

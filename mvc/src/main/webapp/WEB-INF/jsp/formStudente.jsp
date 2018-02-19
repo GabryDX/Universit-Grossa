@@ -13,7 +13,7 @@
 
 <h2>Aggiungi un nuovo studente:<br></h2>
 <form:form method="POST" action="/corso/universita/studentequery" modelAttribute="stucdl">
-	<table>
+	<table class="t01">
 		<%-- <tr>
 			<td><form:label path="stuMatricola">Matricola</form:label></td>
 			<td><form:input path="stuMatricola"/></td>
@@ -60,10 +60,7 @@
 			</td>
 		</tr>
 		<tr>
-			<td><br><br><br></td>
-		</tr>
-		<tr>
-			<td colspan="2"><input type="submit" value="Invia"></td>
+			<td colspan="2"><input type="submit" value="Invia" style="height:50px;width:100%"></td>
 		</tr>
 	</table>
 </form:form>

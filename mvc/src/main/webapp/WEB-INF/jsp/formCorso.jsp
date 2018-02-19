@@ -12,16 +12,22 @@
 <p id="uni"><spring:message code="label.universita"/></p>
 
 <h2><spring:message code="label.corso.titolo"/><br></h2>
-<form:form method="POST" action="/corso/universita/corsoquery" modelAttribute="corso">
-	<table>
+<form:form method="POST" action="/corso/universita/corsoquery" modelAttribute="cc">
+	<table class="t01">
 		<tr>
-			<td><form:label path="cdlId">ID</form:label></td>
-			<td><form:input path="cdlId"/></td>
-			<td><form:errors path="cdlId"/></td>
+			<td style="font-size: 30px;">
+				<form:label path="cdl.cdlId">Scegli il corso di laurea:</form:label>
+			</td>
+			<%-- <td><form:input path="cdlId"/><form:errors path="cdlId"/></td> --%>
+			<td>
+				<form:select path="cdl.cdlId" style="font-size: 30px;">
+					<form:options items="${cc.corsi}" itemValue="cdlId" itemLabel="cdlNome"/>
+				</form:select>
+			</td>
 		</tr>
 		<tr>
 			<spring:message code="label.submit" var="btnlabel"/>
-			<td colspan="2"><input type="submit" value="${btnlabel}"></td>
+			<td colspan="2"><input type="submit" value="${btnlabel}" style="height:50px;width:100%"></td>
 		</tr>
 	</table>
 </form:form>

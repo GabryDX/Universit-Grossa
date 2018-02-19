@@ -17,6 +17,7 @@ import it.corso.mvc.universita.dao.interfaces.ICorsiDiLaureaDao;
 import it.corso.mvc.universita.dao.interfaces.IMaterieDao;
 import it.corso.mvc.universita.model.CorsoDiLaurea;
 import it.corso.mvc.universita.model.Materia;
+import it.corso.mvc.universita.model.form.CorsoCorsi;
 import it.corso.mvc.universita.model.form.CorsoMaterie;
 
 @Controller
@@ -42,20 +43,24 @@ public class UniversitaController {
 	
 	@RequestMapping(value="corsoform",method = RequestMethod.GET)
 	public ModelAndView getCorsoDiLaurea() {
-//		CorsoDiLaurea cdl = cdlDao.search(101);
-		CorsoDiLaurea cdl = new CorsoDiLaurea();
-		ModelAndView modelAndView = new ModelAndView("formCorso", "corso", cdl);
+		CorsoCorsi cc = new CorsoCorsi();
+		cc.setCorsi(cdlDao.readCdlAll());
+//		CorsoDiLaurea cdl = new CorsoDiLaurea();
+		cc.setCdl(new CorsoDiLaurea());
+//		ModelAndView modelAndView = new ModelAndView("formCorso", "corso", cdl);
+		ModelAndView modelAndView = new ModelAndView("formCorso", "cc", cc);
 		return modelAndView;
 	}
 	
 	@RequestMapping(value="corsoquery",method = RequestMethod.POST)
-	public ModelAndView ricercaCorsoDiLaurea(@Valid @ModelAttribute("corso") 
-			CorsoDiLaurea corso, BindingResult result) {
+	public ModelAndView ricercaCorsoDiLaurea(@Valid @ModelAttribute("cc") 
+			CorsoCorsi cc, BindingResult result) {
 		
 		if (result.hasErrors()) {
-			return new ModelAndView("formCorso", "corso", corso);
+			return new ModelAndView("formCorso", "cc", cc);
 		}
 		
+		CorsoDiLaurea corso = cc.getCdl();
 		CorsoDiLaurea risultato = cdlDao.search(corso.getCdlId());
 		if (risultato == null) {
 			risultato = new CorsoDiLaurea();

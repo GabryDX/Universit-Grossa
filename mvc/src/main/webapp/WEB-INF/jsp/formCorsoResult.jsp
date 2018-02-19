@@ -31,7 +31,7 @@
   <c:forEach var="stu" items="${cm.cdl.cdlStudenti}">
   	<tr align="left">
   	  <td>${stu.getStuMatricola()}</td>
-      <td><a href="https://www.google.it/search?q=${stu.getStuCognome()}+${stu.getStuNome()}">${stu.getStuCognome()}</a></td>
+      <td><a href="https://www.google.it/search?q=${stu.getStuCognome()}+${stu.getStuNome()}" target="_blank">${stu.getStuCognome()}</a></td>
       <td>${stu.getStuNome()}</td>
       <td><fmt:formatDate value="${stu.stuDataNascita}" pattern="dd/MM/yyyy" /></td>
       <td>${stu.getStuIscrizione()}</td>

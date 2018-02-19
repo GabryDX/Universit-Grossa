@@ -55,7 +55,7 @@ function check(event) {
 				<tr align="left">
 					<td><input type="checkbox" name="matricola" value="${stu.stuMatricola}" onClick="check(this)" /></td>
 					<td>${stu.stuMatricola}</td>
-					<td><a href="https://www.google.it/search?q=${stu.getStuCognome()}+${stu.getStuNome()}">${stu.getStuCognome()}</a></td>
+					<td><a href="https://www.google.it/search?q=${stu.getStuCognome()}+${stu.getStuNome()}" target="_blank">${stu.getStuCognome()}</a></td>
 					<td>${stu.stuNome}</td>
 					<td>${stu.stuDataNascita}</td>
 					<td>${stu.stuIscrizione}</td>

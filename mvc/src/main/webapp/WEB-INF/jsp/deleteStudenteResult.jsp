@@ -33,7 +33,7 @@
   <c:forEach var="stu" items="${sdf2.studenti}">
   	<tr align="left">
   	  <td>${stu.stuMatricola}</td>
-      <td><a href="https://www.google.it/search?q=${stu.getStuCognome()}+${stu.getStuNome()}">${stu.getStuCognome()}</a></td>
+      <td><a href="https://www.google.it/search?q=${stu.getStuCognome()}+${stu.getStuNome()}" target="_blank">${stu.getStuCognome()}</a></td>
       <td>${stu.stuNome}</td>
       <td>${stu.stuIscrizione}</td>
       <td>${stu.stuSesso}</td>

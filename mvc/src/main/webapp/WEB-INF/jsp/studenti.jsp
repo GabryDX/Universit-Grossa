@@ -29,7 +29,7 @@
   <c:forEach var="stu" items="${stuList}">
   	<tr align="left">
   	  <td>${stu.stuMatricola}</td>
-      <td><a href="https://www.google.it/search?q=${stu.stuCognome}+${stu.stuNome}">${stu.stuCognome}</a></td>
+      <td><a href="https://www.google.it/search?q=${stu.stuCognome}+${stu.stuNome}" target="_blank">${stu.stuCognome}</a></td>
       <td>${stu.stuNome}</td>
       <td>${stu.stuIscrizione}</td>
       <td>${stu.stuSesso}</td>

@@ -177,7 +177,7 @@ public class StudentiDao implements IStudentiDao {
 		int rMat;
 		for (Materia m : mats) {
 			logger.debug(m);
-			rMat = ThreadLocalRandom.current().nextInt(0, 5);
+			rMat = ThreadLocalRandom.current().nextInt(0, 3); //33%
 			if (rMat == 0)
 				materie.add(m);
 		}
@@ -374,7 +374,7 @@ public class StudentiDao implements IStudentiDao {
 				int rMat;
 				for (Materia m : mats) {
 					logger.debug(m);
-					rMat = ThreadLocalRandom.current().nextInt(0, 4); //25%
+					rMat = ThreadLocalRandom.current().nextInt(0, 3); //33%
 					if (rMat == 0)
 						materie.add(m);
 				}

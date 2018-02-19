@@ -1,0 +1,28 @@
+<table class="table table-condensed thead-light table-striped table-sm table-bordered table-hover">
+	<thead class="thead-dark">
+    <tr>
+      <th>Matricola</th>
+      <th>Cognome</th>
+      <th>Nome</th>
+      <th>Iscrizione</th>
+      <th>Sesso</th>
+      <th>Data di nascita</th>
+      <th>Luogo di nascita</th>
+      <th>Codice fiscale</th>
+      <th>Corso di laurea</th>
+    </tr>
+    </thead>
+  <c:forEach var="stu" items="${stuList}">
+  	<tr>
+  	  <td>${stu.stuMatricola}</td>
+      <td><a href="https://www.google.it/search?q=${stu.stuCognome}+${stu.stuNome}" target="_blank">${stu.stuCognome}</a></td>
+      <td>${stu.stuNome}</td>
+      <td>${stu.stuIscrizione}</td>
+      <td>${stu.stuSesso}</td>
+      <td><fmt:formatDate value="${stu.stuDataNascita}" pattern="dd/MM/yyyy" /></td>
+      <td>${stu.stuLuogoNascita}</td>
+      <td>${stu.stuCodiceFiscale}</td>
+      <td>${stu.stuCorsoDiLaurea.getCdlNome()}<br></td>
+    </tr>
+	</c:forEach>
+</table>

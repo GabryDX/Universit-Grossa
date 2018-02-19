@@ -21,7 +21,7 @@
     </tr>
   	<tr align="left">
   	  <td>${stu.stuMatricola}</td>
-      <td><a href="https://www.google.it/search?q=${stu.stuCognome}+${stu.stuNome}">${stu.stuCognome}</a></td>
+      <td><a href="https://www.google.it/search?q=${stu.stuCognome}+${stu.stuNome}" target="_blank">${stu.stuCognome}</a></td>
       <td>${stu.stuNome}</td>
   	</tr>
   	<tr align="left">
